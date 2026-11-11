@@ -15,7 +15,7 @@ The file gives no score and no recommendation.
 
 ## Launchpads
 
-A token is tied to a launchpad only when that launchpad's own deploy contract created it or holds a record for it. Recognized today: Pump.fun, Bonk.fun, StonkFun, Float, Meteora Dynamic Bonding Curve, Pons, Long.xyz, StonkBrokers, Torchpad.fun, Four.meme, Virtuals Protocol, Clanker, Flap, Frontier, Montra, Ascend, Umia, Genius.fun, Rise.rich, Backable.
+A token is tied to a launchpad only when that launchpad's own deploy contract created it or holds a record for it. Recognized today: Ascend, Backable, Bonk.fun, Clanker, Flap, Float, Four.meme, Frontier, Genius.fun, Long.xyz, Meteora Dynamic Bonding Curve, Montra, Pons, Pump.fun, Rise.rich, StonkBrokers, StonkFun, Torchpad.fun, Umia, Virtuals Protocol.
 
 ## Data sources
 

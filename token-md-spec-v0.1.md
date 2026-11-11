@@ -148,7 +148,7 @@ On chains with different token mechanics the Contract fields are adapted. On Sol
 | Deployed by (the address that created the token) | Chain |
 | Deployer is a contract | Chain |
 | Launch transaction, the wallet that sent it and the contract it called | Chain |
-| Recognized launchpad: none, with the list that was checked | Chain |
+| Recognized launchpad: none, when no known launchpad contract is tied to the token | Chain |
 | Creator address, per provider | Provider |
 | Wallet age | Chain |
 | First funded from | Chain or provider |

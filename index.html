@@ -125,7 +125,7 @@ footer { color: var(--dim); display: flex; flex-direction: column; gap: 2px; }
       </div>
       <div class="chips" id="chips"><span>sources:</span></div>
       <div class="rule" aria-hidden="true"></div>
-      <pre id="out" tabindex="0">fetching live data…</pre>
+      <pre id="out" tabindex="0">no file yet. paste a token address above and press generate.</pre>
       <div class="rule" aria-hidden="true"></div>
     </section>
   </main>
@@ -166,7 +166,6 @@ footer { color: var(--dim); display: flex; flex-direction: column; gap: 2px; }
 
 <script>
 /* ---- settings you may want to change ---- */
-const EXAMPLE = { address: "0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b", chain: "base" }; // token shown when the page opens without one
 const BYLINE_HANDLE = "notneils"; // X handle shown and linked in the footer
 /* ----------------------------------------- */
 
@@ -257,7 +256,7 @@ const LAUNCHLAB_PLATFORMS = { "FfYek5vEz23cMkWsdJwG2oa6EphsvXSHrGpdALN4g6W1": "B
 const STONKFUN_OPERATOR = "5CEbueQnq1Ym2uSSx2xXds3jQAqT1BDnkA59RZobSPAG";
 const BAGS_CREATOR = "BAGSB9TpGrZxQbEsrEznv5jXXdwyP6AXerN8aVRiAmcv";
 const SOL_PROGRAMS = { [PUMP]: "Pump.fun", [LAUNCHLAB]: "Raydium LaunchLab", [DBC]: "Meteora Dynamic Bonding Curve" };
-const LAUNCHPAD_NAMES = ["Pump.fun", "Bonk.fun", "StonkFun (stonkfun.xyz)", "Float", "Meteora Dynamic Bonding Curve", "Pons", "Long.xyz", "StonkBrokers", "Torchpad.fun", "Four.meme", "Virtuals Protocol", "Clanker", "Flap", "Frontier", "Montra", "Ascend", "Umia", "Genius.fun", "Rise.rich", "Backable"];
+const LAUNCHPAD_NAMES = ["Ascend", "Backable", "Bonk.fun", "Clanker", "Flap", "Float", "Four.meme", "Frontier", "Genius.fun", "Long.xyz", "Meteora Dynamic Bonding Curve", "Montra", "Pons", "Pump.fun", "Rise.rich", "StonkBrokers", "StonkFun (stonkfun.xyz)", "Torchpad.fun", "Umia", "Virtuals Protocol"];
 
 async function rpc(url, method, params) {
   const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 15000);
@@ -805,7 +804,7 @@ async function generate(input) {
     if (launch.deployer) add("- Deployed by: " + launch.deployer + (launch.pad && launch.isFactory ? ", a launchpad contract" : "") + " (source: " + launch.source + ")");
     if (launch.isFactory !== null && launch.isFactory !== undefined) add("- Deployer is a contract: " + (launch.isFactory ? "yes" : "no, a wallet deployed the token directly"));
     if (launch.tx) add("- Launch transaction: " + launch.tx + (launch.sender ? ", sent by " + launch.sender : "") + (launch.to ? ", calling " + launch.to + (launch.toName ? " (" + launch.toName + ")" : "") : "") + " (source: " + launch.source + ")");
-    if (!launch.pad) add("- Recognized launchpad: none. No deploy contract of these was found for this token: " + LAUNCHPAD_NAMES.join(", ") + ".");
+    if (!launch.pad) add("- Recognized launchpad: none");
     for (const n of launch.notes || []) add("- " + n);
   } else add("- Deploy contract: " + NF + (chainSrc ? " (" + chainSrc + " did not answer)" : " (this chain is not covered)"));
   if (gpCreator) add("- Creator address, per GoPlus: " + gpCreator);
@@ -1088,8 +1087,10 @@ async function copyText(text, btn, done) {
     const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([current.md], { type: "text/markdown" }));
     a.download = "token.md"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   });
-  const start = fromUrl() || { ...EXAMPLE, issuer: {} };
-  fillForm(start); run(start, false);
+  /* the page opens empty; only a live link (?a=address) fills the form and builds a file */
+  const start = fromUrl();
+  if (start) { fillForm(start); run(start, false); }
+  else { $("out").textContent = "no file yet. paste a token address above and press generate."; $("address").focus(); }
 })();
 </script>
 </body>
