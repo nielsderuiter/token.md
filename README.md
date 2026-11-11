@@ -4,7 +4,6 @@ company.md, for tokens. One markdown file an AI agent can read to learn what is 
 
 - `index.html` is the generator. Paste a token address and it builds a token.md from live data in your browser. It is a single static page with no server and no API keys.
 - `token-md-spec-v0.1.md` is the spec: which sections and fields a token.md has, and where each one comes from.
-- `worker.js` is the same generator as a small Cloudflare Worker. It serves the file as plain `text/markdown` at `/<chain>/<address>/token.md`, for agents that do not run JavaScript. It never accepts issuer text.
 - `llms.txt` points agents to the spec.
 
 ## What a file contains
